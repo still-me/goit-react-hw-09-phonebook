@@ -1,0 +1,19 @@
+@import 'styles/shared';
+
+.container {
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 1200px;
+}
+
+.section {
+  padding-top: 30px;
+  padding-bottom: 30px;
+
+  &__title {
+    color: $title-color;
+    margin-bottom: 20px;
+  }
+}

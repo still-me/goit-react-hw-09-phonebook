@@ -1,0 +1,27 @@
+@import 'styles/shared';
+.contacts {
+  &__list {
+    @extend %list;
+    list-style: square;
+  }
+}
+
+.contacts__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &:not(:last-child) {
+    margin-bottom: 10px;
+  }
+}
+
+.contact__info {
+  margin-bottom: 0;
+  margin-right: 10px;
+}
+
+.contact__button--delete {
+  @extend %button;
+  min-width: 100px;
+}
