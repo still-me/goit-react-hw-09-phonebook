@@ -1,38 +1,33 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import React, { useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import './Filter.scss';
 import { changeFilter } from '../../redux/contacts/contacts-actions';
 import { getFilterValue } from '../../redux/contacts/contacts-selectors';
 
-const Filter = ({ value, onChange }) => (
-  <label className="filter__label">
-    <p className="filter__hint">Find contacts by name</p>
-    <input
-      className="filter__input"
-      type="text"
-      value={value}
-      onChange={onChange}
-    ></input>
-  </label>
-);
+const Filter = () => {
+  const value = useSelector(getFilterValue);
 
-Filter.defaultProps = {
-  onChange: () => null,
+  const dispatch = useDispatch();
+
+  const onChange = useCallback(
+    ({ target: { value } }) => {
+      dispatch(changeFilter(value));
+    },
+    [dispatch],
+  );
+
+  return (
+    <label className="filter__label">
+      <p className="filter__hint">Find contacts by name</p>
+      <input
+        className="filter__input"
+        type="text"
+        value={value}
+        onChange={onChange}
+      ></input>
+    </label>
+  );
 };
 
-Filter.propTypes = {
-  value: PropTypes.string.isRequired,
-  onChange: PropTypes.func,
-};
-
-const mapStateToProps = state => ({
-  value: getFilterValue(state),
-});
-
-const mapDispatchToProps = dispatch => ({
-  onChange: e => dispatch(changeFilter(e.target.value)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Filter);
+export default Filter;

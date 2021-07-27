@@ -1,6 +1,6 @@
 @import 'styles/shared';
 
-.form {
+.contacts-form {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -20,8 +20,10 @@
     @extend %button;
     width: 200px;
   }
-}
 
-.contacts__button {
-  @extend %button;
+  &__repeated-contact {
+    color: $alarm-color;
+    font-size: 16px;
+    text-align: left;
+  }
 }

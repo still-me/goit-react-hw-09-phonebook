@@ -1,0 +1,27 @@
+@import 'styles/shared';
+
+.auth-nav {
+  &__link {
+    display: inline-block;
+    text-decoration: none;
+    padding: 12px;
+    font-weight: 700;
+    font-size: 20px;
+    color: $black;
+    transition: color 250ms $timing-function, text-shadow 250ms $timing-function,
+      transform 230ms $timing-function;
+
+    &:hover {
+      color: white;
+      text-shadow: -1px 6px 15px rgba(84, 240, 250, 0.76),
+        5px 5px 1px rgba(100, 240, 250, 0.4);
+      transform: translate(5%, -5%);
+    }
+  }
+
+  &__link--active {
+    color: $white;
+    text-shadow: -1px 6px 15px rgba(84, 240, 250, 0.76),
+      5px 5px 1px rgba(100, 240, 250, 0.4);
+  }
+}

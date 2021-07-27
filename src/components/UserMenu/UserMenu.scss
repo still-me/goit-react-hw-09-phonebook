@@ -1,6 +1,41 @@
 @import 'styles/shared';
 
 .user-menu {
-  @extend %button;
-  padding: 5px 15px;
+  &__button {
+    @extend %button;
+    padding: 5px 15px;
+
+    background-image: linear-gradient(
+      to right,
+      $title-color 0%,
+      $button-color 51%,
+      $title-color 100%
+    );
+    font-size: 14px;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    box-shadow: 0 0 20px $white;
+    border-radius: 7px;
+
+    &:hover {
+      background-position: right center;
+    }
+  }
+
+  &__container {
+    display: flex;
+    align-items: center;
+  }
+
+  &__avatar {
+    margin-right: 4px;
+  }
+
+  &__name {
+    font-weight: 700;
+    font-size: 20px;
+    margin-right: 12px;
+    color: $border-color;
+  }
 }

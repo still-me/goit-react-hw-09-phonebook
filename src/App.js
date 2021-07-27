@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import { Suspense, lazy } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import Loader from './components/Loader';
 import Section from './components/Section';
@@ -25,53 +25,48 @@ const ContactsView = lazy(() =>
   import('./views/ContactsView' /* webpackChunkName: "contacts-page" */),
 );
 
-class App extends Component {
-  state = {};
+const App = () => {
+  const isLoading = useSelector(getIsLoading);
 
-  componentDidMount() {
-    this.props.onGetCurrentUser();
-  }
+  const dispatch = useDispatch();
 
-  render() {
-    const { isLoading } = this.props;
-    return (
-      <Section>
-        {isLoading && <Loader />}
+  useEffect(() => {
+    dispatch(getCurrentUser());
+  }, [dispatch]);
 
-        <AppBar />
-        <Suspense fallback={<Loader />}>
-          <Switch>
-            <Route exact path={routes.home} component={HomeView} />
-            <PublicRoute
-              path={routes.register}
-              restricted
-              redirectTo={routes.contacts}
-              component={RegisterView}
-            />
-            <PublicRoute
-              path={routes.login}
-              restricted
-              redirectTo={routes.contacts}
-              component={LoginView}
-            />
-            <PrivateRoute
-              path={routes.contacts}
-              component={ContactsView}
-              redirectTo={routes.login}
-            />
-          </Switch>
-        </Suspense>
-      </Section>
-    );
-  }
-}
+  return (
+    <Section>
+      {isLoading && <Loader />}
+      <AppBar />
+      <Suspense fallback={<Loader />}>
+        <Switch>
+          <Route exact path={routes.home}>
+            <HomeView />
+          </Route>
 
-const mapStateToProps = state => ({
-  isLoading: getIsLoading(state),
-});
+          <PublicRoute
+            path={routes.register}
+            restricted
+            redirectTo={routes.contacts}
+          >
+            <RegisterView />
+          </PublicRoute>
 
-const mapDispatchToProps = {
-  onGetCurrentUser: getCurrentUser,
+          <PublicRoute
+            path={routes.login}
+            restricted
+            redirectTo={routes.contacts}
+          >
+            <LoginView />
+          </PublicRoute>
+
+          <PrivateRoute path={routes.contacts} redirectTo={routes.login}>
+            <ContactsView />
+          </PrivateRoute>
+        </Switch>
+      </Suspense>
+    </Section>
+  );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;

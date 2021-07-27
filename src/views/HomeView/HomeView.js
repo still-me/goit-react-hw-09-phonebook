@@ -1,20 +1,9 @@
-import styled, { keyframes } from 'styled-components';
-import { fadeInDownBig, bounceInRight } from 'react-animations';
 import { Link } from 'react-router-dom';
 
 import './HomeView.scss';
 import routes from '../../routes';
 import Section from '../../components/Section';
-
-const fadeInDownBigAnimation = keyframes`${fadeInDownBig}`;
-const BouncyDiv = styled.div`
-  animation: 1s ${fadeInDownBigAnimation};
-`;
-
-const bounceInRightAnimation = keyframes`${bounceInRight}`;
-const BounceInRightSpan = styled.span`
-  animation: 5s ${bounceInRightAnimation};
-`;
+import { BouncyDiv, BounceInRightSpan } from './animatedComponents';
 
 const HomeView = () => (
   <Section>

@@ -3,11 +3,20 @@
 
 body {
   margin: 0;
+  height: 100vh;
   background-color: $white;
   color: $main-color;
   line-height: 1.5;
   font-family: $primary-font-stack;
-  background-image: url(../images/bg.png);
+  background-image: radial-gradient(
+      circle,
+      rgba(109, 213, 250, 0.34637605042016806) 14%,
+      rgba(41, 128, 185, 0.3519782913165266) 52%,
+      rgba(255, 255, 255, 0.4108018207282913) 92%
+    ),
+    linear-gradient(rgba(183, 183, 190, 0.4), rgba(183, 183, 190, 0.4)),
+    url(../images/bg.png);
+  background-repeat: no-repeat;
   background-size: cover;
 }
 

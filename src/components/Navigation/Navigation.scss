@@ -1,0 +1,28 @@
+@import 'styles/shared';
+
+.navigation {
+  &__link {
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+    padding: 12px;
+    font-weight: 700;
+    font-size: 20px;
+    color: $black;
+    transition: color 250ms $timing-function, text-shadow 250ms $timing-function,
+      transform 250ms $timing-function;
+
+    &:hover {
+      color: $white;
+      text-shadow: 0 0 20px $accent-color, 0 0 30px $accent-color,
+        0 0 40px $accent-color, 3px -1px 1px $black;
+      transform: translate(5%, -5%);
+    }
+  }
+
+  &__link--active {
+    color: $white;
+    text-shadow: 0 0 20px $accent-color, 0 0 30px $accent-color,
+      0 0 40px $accent-color, 3px -1px 1px $black;
+  }
+}

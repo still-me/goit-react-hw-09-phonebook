@@ -1,20 +1,19 @@
 %button {
   padding: 5px 15px;
-  border: 1px solid $border-color;
+  box-shadow: 0 0 20px $border-color;
   font: inherit;
   outline: none;
   color: $border-color;
   background-color: $button-color;
-  border-radius: 3px;
-
-  transition: color 250ms $timing-function,
-    background-color 250ms $timing-function, border-color 250ms $timing-function;
+  border: none;
+  border-radius: 7px;
+  transition: all 250ms $timing-function;
 
   &:hover,
   &:focus {
     color: $button-color;
     background-color: $border-color;
-    border-color: $accent-color;
+    box-shadow: 0 0 20px $accent-color;
   }
 }
 

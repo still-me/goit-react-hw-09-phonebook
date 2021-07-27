@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import React, { useState, useEffect, useCallback } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { CSSTransition } from 'react-transition-group';
 import { Link } from 'react-router-dom';
 
@@ -16,113 +15,98 @@ import routes from '../../routes';
 import './LoginView.scss';
 import fadeTransition from '../../styles/transition/fade.module.css';
 
-class LoginView extends Component {
-  state = {
-    email: '',
-    password: '',
+const LoginView = () => {
+  const isError = useSelector(getIsError);
+  const dispatch = useDispatch();
+
+  const [email, setEmail] = useState('');
+  const handelEmailChange = ({ target: { value } }) => {
+    setEmail(value);
   };
 
-  componentDidMount() {
-    this.props.removeError();
-  }
-
-  handleChange = ({ target: { name, value } }) => {
-    this.setState({ [name]: value });
+  const [password, setPassword] = useState('');
+  const handelPasswordChange = ({ target: { value } }) => {
+    setPassword(value);
   };
 
-  handleSubmit = e => {
+  useEffect(() => {
+    dispatch(removeError());
+  }, [dispatch]);
+
+  const handleSubmit = e => {
     e.preventDefault();
 
-    this.props.onLogin(this.state);
+    dispatch(logIn({ email, password }));
 
-    this.setState({ name: '', email: '', password: '' });
+    setEmail('');
+    setPassword('');
   };
 
-  render() {
-    const { email, password } = this.state;
+  const onRemoveError = useCallback(() => {
+    dispatch(removeError());
+  }, [dispatch]);
 
-    return (
-      <Section>
-        <CSSTransition
-          in={this.props.isError}
-          timeout={200}
-          classNames={fadeTransition}
-          unmountOnExit
+  return (
+    <Section>
+      <CSSTransition
+        in={isError}
+        timeout={200}
+        classNames={fadeTransition}
+        unmountOnExit
+      >
+        <Alert
+          dismissible
+          variant="info"
+          onClose={onRemoveError}
+          className="login__alert"
         >
-          <Alert
-            dismissible
-            variant="info"
-            onClose={() => this.props.removeError()}
-            className="login__alert"
-          >
-            <Alert.Heading>Something with entered data</Alert.Heading>
-            <p>Please check:</p>
-            <p>-your password length minimum 7 symbols</p>
-            <p>-email format is name@example.com</p>
-            <p>-or you can try to register</p>
-          </Alert>
-        </CSSTransition>
-        <Form onSubmit={this.handleSubmit} className="login__form">
-          <FloatingLabel
-            controlId="floatingInput"
-            label="Email address"
-            className="mb-3"
-          >
-            <Form.Control
-              name="email"
-              type="email"
-              placeholder="name@example.com"
-              value={email}
-              onChange={this.handleChange}
-            />
-          </FloatingLabel>
+          <Alert.Heading>Something with entered data</Alert.Heading>
+          <p>Please check:</p>
+          <p>-your password length minimum 7 symbols</p>
+          <p>-email format is name@example.com</p>
+          <p>-or you can try to register</p>
+        </Alert>
+      </CSSTransition>
+      <Form onSubmit={handleSubmit} className="login__form">
+        <FloatingLabel
+          controlId="floatingInput"
+          label="Email address"
+          className="mb-3"
+        >
+          <Form.Control
+            name="email"
+            type="email"
+            placeholder="name@example.com"
+            value={email}
+            onChange={handelEmailChange}
+          />
+        </FloatingLabel>
 
-          <FloatingLabel controlId="floatingPassword" label="Password">
-            <Form.Control
-              aria-describedby="passwordHelpBlock"
-              name="password"
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={this.handleChange}
-            />
-            <Form.Text id="passwordHelpBlock" muted>
-              Your password must minimum 7 characters long.
-            </Form.Text>
-          </FloatingLabel>
-          <Button className="login__button" type="submit">
-            Log In
-          </Button>
-          <div className="login__wrapper">
-            <p>Don't have an account?</p>
-            <Link className="login__link" to={routes.register}>
-              Sign Up
-            </Link>
-          </div>
-        </Form>
-      </Section>
-    );
-  }
-}
-
-LoginView.defaulProps = {
-  onLogin: () => null,
-  removeError: () => null,
+        <FloatingLabel controlId="floatingPassword" label="Password">
+          <Form.Control
+            aria-describedby="passwordHelpBlock"
+            name="password"
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={handelPasswordChange}
+          />
+          <Form.Text id="passwordHelpBlock" muted>
+            Your password must minimum 7 characters long.
+          </Form.Text>
+        </FloatingLabel>
+        <Button className="login__button" type="submit">
+          Log In
+        </Button>
+        <div className="login__wrapper">
+          <p>Don't have an account?</p>
+          <Link className="login__link" to={routes.register}>
+            Sign Up
+          </Link>
+        </div>
+      </Form>
+    </Section>
+  );
 };
 
-LoginView.propTypes = {
-  isError: PropTypes.bool,
-  onLogin: PropTypes.func,
-  removeError: PropTypes.func,
-};
-
-const mapStateToProps = state => ({
-  isError: getIsError(state),
-});
-
-const mapDispatchToProps = {
-  onLogin: logIn,
-  removeError: removeError,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(LoginView);
+export default LoginView;

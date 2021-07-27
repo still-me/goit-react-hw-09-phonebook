@@ -1,17 +1,19 @@
 @import 'styles/shared';
 
-.filter__label {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 30px;
-  width: 100%;
-}
+.filter {
+  &__label {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+    width: 100%;
+  }
 
-.filter__input {
-  @extend %input;
-  width: 100%;
-}
+  &__input {
+    @extend %input;
+    width: 100%;
+  }
 
-.filter__hint {
-  margin-bottom: 10px;
+  &__hint {
+    margin-bottom: 10px;
+  }
 }
