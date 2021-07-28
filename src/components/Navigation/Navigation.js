@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
 import './Navigation.scss';
-import routes from '../../routes';
+import routes from '../../utils/routes';
 import { getIsAuthenticated } from '../../redux/auth/auth-selectors';
 
 const Navigation = () => {

@@ -3,11 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { CSSTransition } from 'react-transition-group';
 
 import './ContactForm.scss';
-import fadeTransition from '../../styles/transition/fade.module.css';
+import '../../styles/transition/warning.scss';
 import { addContact } from '../../redux/contacts/contacts-operations';
 import { getContacts } from '../../redux/contacts/contacts-selectors';
 
-const ContactForm = () => {
+const ContactForm = ({ onSave }) => {
   const contacts = useSelector(getContacts);
   const dispatch = useDispatch();
 
@@ -36,6 +36,7 @@ const ContactForm = () => {
       if (!includesContact) {
         dispatch(addContact(name, number));
         reset();
+        onSave();
         if (repeatedContact) {
           setRepeatedContact(null);
         }
@@ -43,7 +44,7 @@ const ContactForm = () => {
       }
       setRepeatedContact(includesContact.name);
     },
-    [contacts, dispatch, name, number, repeatedContact],
+    [contacts, dispatch, name, number, repeatedContact, onSave],
   );
 
   return (
@@ -64,7 +65,7 @@ const ContactForm = () => {
       <label className="contacts-form__label">
         Number
         <input
-          className="contacts-form__input"
+          className="contacts-form__input last-el"
           type="tel"
           name="number"
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
@@ -80,7 +81,7 @@ const ContactForm = () => {
       <CSSTransition
         in={Boolean(repeatedContact)}
         timeout={200}
-        classNames={fadeTransition}
+        classNames="warn"
         unmountOnExit
       >
         <p className="contacts-form__repeated-contact">

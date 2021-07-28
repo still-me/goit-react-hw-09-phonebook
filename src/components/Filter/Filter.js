@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import './Filter.scss';
 import { changeFilter } from '../../redux/contacts/contacts-actions';
 import { getFilterValue } from '../../redux/contacts/contacts-selectors';
+import { ReactComponent as FindIcon } from '../../images/find-icon.svg';
 
 const Filter = () => {
   const value = useSelector(getFilterValue);
@@ -26,6 +27,7 @@ const Filter = () => {
         value={value}
         onChange={onChange}
       ></input>
+      <FindIcon className="find-icon" />
     </label>
   );
 };

@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Loader from './components/Loader';
 import Section from './components/Section';
 import AppBar from './components/AppBar';
-import routes from './routes';
+import routes from './utils/routes';
 import { getIsLoading } from './redux/common/common-selectors';
 import { getCurrentUser } from './redux/auth/auth-operations';
 import PrivateRoute from './components/PrivateRoute';

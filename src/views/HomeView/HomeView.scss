@@ -12,7 +12,7 @@
   transition: color 250ms $timing-function;
 
   &:hover {
-    color: $accent-color;
+    color: $title-color;
   }
 }
 
@@ -21,8 +21,13 @@
 }
 
 .sign-up__link {
-  border-bottom: 2px solid $accent-color;
+  border-bottom: 2px solid $title-color;
   margin-left: 30px;
+  transition: transform 250ms $timing-function;
+
+  &:hover {
+    transform: scale(1.2);
+  }
 }
 
 .home__main-title {

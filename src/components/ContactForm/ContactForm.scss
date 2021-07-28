@@ -19,6 +19,7 @@
   &__button {
     @extend %button;
     width: 200px;
+    margin-bottom: 12px;
   }
 
   &__repeated-contact {
@@ -26,4 +27,8 @@
     font-size: 16px;
     text-align: left;
   }
+}
+
+.last-el {
+  margin-bottom: 12px;
 }

@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 
 import './AuthNav.scss';
-import routes from '../../routes';
+import routes from '../../utils/routes';
 
 const AuthNav = () => (
   <div>

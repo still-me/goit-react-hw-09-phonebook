@@ -1,14 +1,17 @@
 import { Link } from 'react-router-dom';
 
 import './HomeView.scss';
-import routes from '../../routes';
+import routes from '../../utils/routes';
 import Section from '../../components/Section';
-import { BouncyDiv, BounceInRightSpan } from './animatedComponents';
+import {
+  FadeInDownDiv,
+  BounceInRightSpan,
+} from '../../utils/animatedComponents';
 
 const HomeView = () => (
   <Section>
-    <BouncyDiv className="home__welcome">
-      <h1 className="home__main-title">Welcome to phone book!</h1>
+    <FadeInDownDiv className="home__welcome">
+      <h1 className="home__main-title">Welcome to your contacts book!</h1>
       <p>This application was created for storage your contacts</p>
       <p className="home__sign-up">
         For first using you should
@@ -18,7 +21,7 @@ const HomeView = () => (
           </Link>
         </BounceInRightSpan>
       </p>
-    </BouncyDiv>
+    </FadeInDownDiv>
   </Section>
 );
 

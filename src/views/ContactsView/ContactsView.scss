@@ -1,11 +1,16 @@
+@import 'styles/shared';
+
 .contacts {
   &-wrapper {
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
   }
 
   &__add-container {
     width: 300px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   &__list-container {
@@ -15,4 +20,22 @@
   &__add-hint {
     margin-bottom: 10px;
   }
+
+  &__button--add {
+    @extend %button;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    fill: $border-color;
+
+    &:hover {
+      fill: $white;
+    }
+  }
+}
+
+.icon-add {
+  width: 18px;
+  margin-left: 5px;
 }
