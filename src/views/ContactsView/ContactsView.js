@@ -39,6 +39,8 @@ const ContactsView = () => {
           <ContactList />
         </div>
 
+        {showModal && <div className="backdrop-dark"></div>}
+
         <CSSTransition
           in={showModal}
           timeout={300}
